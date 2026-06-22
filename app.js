@@ -7,29 +7,23 @@
 const AR_POINTS = [
   {
     id: "ra-releitura-1",
-    image: "assets/releitura-1.svg",
+    model: "teste carro.gltf",
     latitude: -4.963856792480823,
     longitude: -39.02575945854149,
-    width: 3,
-    height: 2,
     scale: "1 1 1"
   },
   {
     id: "ra-releitura-2",
-    image: "assets/releitura-2.svg",
+    model: "teste carro.gltf",
     latitude: -4.963856792480823,
     longitude: -39.02575945854149,
-    width: 3,
-    height: 2,
     scale: "1 1 1"
   },
   {
     id: "ra-releitura-3",
-    image: "assets/releitura-3.svg",
+    model: "teste carro.gltf",
     latitude: -4.963856792480823,
     longitude: -39.02575945854149,
-    width: 3,
-    height: 2,
     scale: "1 1 1"
   }
 ];
@@ -79,7 +73,7 @@ closeButton?.addEventListener("click", () => {
 
 AFRAME.registerComponent("ar-point-manager", {
   schema: {
-    visualDistance: { type: 'number', default: 3.5 },
+    visualDistance: { type: 'number', default: 4 },
     baseScale: { type: 'vec3', default: {x: 1, y: 1, z: 1} },
     index: { type: 'number', default: 0 }
   },
@@ -101,9 +95,9 @@ AFRAME.registerComponent("ar-point-manager", {
     direction.applyQuaternion(cameraEl.object3D.quaternion);
     
     if (this.data.index === 1) {
-      direction.applyAxisAngle(new THREE.Vector3(0, 1, 0), 0.5);
+      direction.applyAxisAngle(new THREE.Vector3(0, 1, 0), 0.6);
     } else if (this.data.index === 2) {
-      direction.applyAxisAngle(new THREE.Vector3(0, 1, 0), -0.5);
+      direction.applyAxisAngle(new THREE.Vector3(0, 1, 0), -0.6);
     }
     
     let targetPos = new THREE.Vector3();
@@ -124,11 +118,10 @@ function buildARScene() {
   const assets = document.createElement("a-assets");
 
   AR_POINTS.forEach((point) => {
-    const img = document.createElement("img");
-    img.setAttribute("id", point.id);
-    img.setAttribute("src", point.image);
-    img.setAttribute("crossorigin", "anonymous");
-    assets.appendChild(img);
+    const assetItem = document.createElement("a-asset-item");
+    assetItem.setAttribute("id", point.id);
+    assetItem.setAttribute("src", point.model);
+    assets.appendChild(assetItem);
   });
 
   scene.appendChild(assets);
@@ -138,14 +131,12 @@ function buildARScene() {
   scene.appendChild(camera);
 
   AR_POINTS.forEach((point, idx) => {
-    const image = document.createElement("a-image");
-    image.setAttribute("src", `#${point.id}`);
-    image.setAttribute("width", point.width);
-    image.setAttribute("height", point.height);
-    image.setAttribute("gps-new-entity-place", `latitude: ${point.latitude}; longitude: ${point.longitude}`);
-    image.setAttribute("ar-point-manager", `visualDistance: 3.5; baseScale: ${point.scale}; index: ${idx}`);
+    const entity = document.createElement("a-entity");
+    entity.setAttribute("gltf-model", `#${point.id}`);
+    entity.setAttribute("gps-new-entity-place", `latitude: ${point.latitude}; longitude: ${point.longitude}`);
+    entity.setAttribute("ar-point-manager", `visualDistance: 4; baseScale: ${point.scale}; index: ${idx}`);
     
-    scene.appendChild(image);
+    scene.appendChild(entity);
   });
 
   arRoot.appendChild(scene);
