@@ -10,8 +10,8 @@ const AR_POINTS = [
     image: "assets/releitura-1.svg",
     latitude: -4.963856792480823,
     longitude: -39.02575945854149,
-    width: 0.4,
-    height: 0.26,
+    width: 3,
+    height: 2,
     scale: "1 1 1"
   },
   {
@@ -19,8 +19,8 @@ const AR_POINTS = [
     image: "assets/releitura-2.svg",
     latitude: -4.963856792480823,
     longitude: -39.02575945854149,
-    width: 0.4,
-    height: 0.26,
+    width: 3,
+    height: 2,
     scale: "1 1 1"
   },
   {
@@ -28,8 +28,8 @@ const AR_POINTS = [
     image: "assets/releitura-3.svg",
     latitude: -4.963856792480823,
     longitude: -39.02575945854149,
-    width: 0.4,
-    height: 0.26,
+    width: 3,
+    height: 2,
     scale: "1 1 1"
   }
 ];
@@ -79,9 +79,9 @@ closeButton?.addEventListener("click", () => {
 
 AFRAME.registerComponent("ar-point-manager", {
   schema: {
-    maxDistance: { type: 'number', default: 50 },
-    minVisualDistance: { type: 'number', default: 2.5 },
-    baseScale: { type: 'vec3', default: {x: 1, y: 1, z: 1} }
+    visualDistance: { type: 'number', default: 3.5 },
+    baseScale: { type: 'vec3', default: {x: 1, y: 1, z: 1} },
+    index: { type: 'number', default: 0 }
   },
   
   init: function () {
@@ -92,28 +92,24 @@ AFRAME.registerComponent("ar-point-manager", {
     const cameraEl = document.querySelector("[gps-new-camera]");
     if (!cameraEl || !this.el.object3D) return;
 
+    this.el.setAttribute("visible", "true");
     this.el.object3D.lookAt(cameraEl.object3D.position);
 
     const cameraPos = cameraEl.object3D.position;
-    const objectPos = this.el.object3D.position;
-    const realDistance = cameraPos.distanceTo(objectPos);
-
-    if (realDistance > this.data.maxDistance) {
-      this.el.setAttribute("visible", "false");
-      return;
-    } else {
-      this.el.setAttribute("visible", "true");
+    
+    let direction = new THREE.Vector3(0, 0, -1);
+    direction.applyQuaternion(cameraEl.object3D.quaternion);
+    
+    if (this.data.index === 1) {
+      direction.applyAxisAngle(new THREE.Vector3(0, 1, 0), 0.5);
+    } else if (this.data.index === 2) {
+      direction.applyAxisAngle(new THREE.Vector3(0, 1, 0), -0.5);
     }
-
-    if (realDistance < this.data.minVisualDistance) {
-      let direction = new THREE.Vector3(0, 0, -1);
-      direction.applyQuaternion(cameraEl.object3D.quaternion);
-      
-      let targetPos = new THREE.Vector3();
-      targetPos.addVectors(cameraPos, direction.multiplyScalar(this.data.minVisualDistance));
-      
-      this.el.object3D.position.copy(targetPos);
-    }
+    
+    let targetPos = new THREE.Vector3();
+    targetPos.addVectors(cameraPos, direction.multiplyScalar(this.data.visualDistance));
+    
+    this.el.object3D.position.copy(targetPos);
   }
 });
 
@@ -141,13 +137,13 @@ function buildARScene() {
   camera.setAttribute("gps-new-camera", "gpsMinDistance: 1"); 
   scene.appendChild(camera);
 
-  AR_POINTS.forEach((point) => {
+  AR_POINTS.forEach((point, idx) => {
     const image = document.createElement("a-image");
     image.setAttribute("src", `#${point.id}`);
     image.setAttribute("width", point.width);
     image.setAttribute("height", point.height);
     image.setAttribute("gps-new-entity-place", `latitude: ${point.latitude}; longitude: ${point.longitude}`);
-    image.setAttribute("ar-point-manager", `maxDistance: 50; minVisualDistance: 2.5; baseScale: ${point.scale}`);
+    image.setAttribute("ar-point-manager", `visualDistance: 3.5; baseScale: ${point.scale}; index: ${idx}`);
     
     scene.appendChild(image);
   });
