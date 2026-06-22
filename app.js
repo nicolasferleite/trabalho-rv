@@ -78,11 +78,30 @@ closeButton?.addEventListener("click", () => {
   document.body.style.overflow = "";
 });
 
-AFRAME.registerComponent("face-camera", {
+// Componente para rotacionar o objeto para a câmera E controlar visibilidade/escala por distância
+AFRAME.registerComponent("ar-point-behavior", {
+  schema: {
+    maxDistance: { type: 'number', default: 50 } // Distância máxima em metros para o objeto aparecer
+  },
+  
   tick: function () {
-    const camera = document.querySelector("[gps-new-camera]");
-    if (!camera) return;
-    this.el.object3D.lookAt(camera.object3D.position);
+    const cameraEl = document.querySelector("[gps-new-camera]");
+    if (!cameraEl || !this.el.object3D) return;
+
+    // 1. Faz o objeto sempre olhar para a câmera
+    this.el.object3D.lookAt(cameraEl.object3D.position);
+
+    // 2. Calcula a distância real entre a câmera e o objeto tridimensional
+    const cameraPos = cameraEl.object3D.position;
+    const objectPos = this.el.object3D.position;
+    const distance = cameraPos.distanceTo(objectPos);
+
+    // 3. Se estiver além da distância máxima, esconde o elemento para não poluir a tela
+    if (distance > this.data.maxDistance) {
+      this.el.setAttribute("visible", "false");
+    } else {
+      this.el.setAttribute("visible", "true");
+    }
   }
 });
 
@@ -90,6 +109,7 @@ function buildARScene() {
   const scene = document.createElement("a-scene");
   scene.setAttribute("vr-mode-ui", "enabled: false");
   scene.setAttribute("embedded", "");
+  // Adicionado o parâmetro 'simulateLatitude' e 'simulateLongitude' se precisar testar localmente no PC
   scene.setAttribute("arjs", "sourceType: webcam; videoTexture: true; debugUIEnabled: false");
   scene.setAttribute("renderer", "antialias: true; alpha: true");
   scene.setAttribute("loading-screen", "enabled: false");
@@ -107,7 +127,8 @@ function buildARScene() {
   scene.appendChild(assets);
 
   const camera = document.createElement("a-camera");
-  camera.setAttribute("gps-new-camera", "gpsMinDistance: 5");
+  // Reduzi a distância mínima para atualização do GPS para melhorar a precisão ao andar
+  camera.setAttribute("gps-new-camera", "gpsMinDistance: 2"); 
   scene.appendChild(camera);
 
   AR_POINTS.forEach((point) => {
@@ -115,9 +136,15 @@ function buildARScene() {
     image.setAttribute("src", `#${point.id}`);
     image.setAttribute("width", point.width);
     image.setAttribute("height", point.height);
-    image.setAttribute("scale", point.scale);
+    
+    // Diminuí um pouco a escala inicial para testar, já que 10m x 4m de largura vira um objeto de 40 metros de largura no mundo real!
+    image.setAttribute("scale", "2 2 2"); 
+    
     image.setAttribute("gps-new-entity-place", `latitude: ${point.latitude}; longitude: ${point.longitude}`);
-    image.setAttribute("face-camera", "");
+    
+    // Aplicando o novo componente configurado para sumir se passar de 60 metros de distância
+    image.setAttribute("ar-point-behavior", "maxDistance: 60");
+    
     scene.appendChild(image);
   });
 
