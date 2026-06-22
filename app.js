@@ -7,21 +7,21 @@
 const AR_POINTS = [
   {
     id: "ra-releitura-1",
-    model: "teste carro.gltf",
+    model: "teste-carro.gltf",
     latitude: -4.963856792480823,
     longitude: -39.02575945854149,
     scale: "5 5 5"
   },
   {
     id: "ra-releitura-2",
-    model: "teste carro.gltf",
+    model: "teste-carro.gltf",
     latitude: -4.963856792480823,
     longitude: -39.02575945854149,
     scale: "5 5 5"
   },
   {
     id: "ra-releitura-3",
-    model: "teste carro.gltf",
+    model: "teste-carro.gltf",
     latitude: -4.963856792480823,
     longitude: -39.02575945854149,
     scale: "5 5 5"
