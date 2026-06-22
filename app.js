@@ -10,8 +10,8 @@ const AR_POINTS = [
     image: "assets/releitura-1.svg",
     latitude: -4.963856792480823,
     longitude: -39.02575945854149,
-    width: 1.5,
-    height: 1,
+    width: 0.4,
+    height: 0.26,
     scale: "1 1 1"
   },
   {
@@ -19,8 +19,8 @@ const AR_POINTS = [
     image: "assets/releitura-2.svg",
     latitude: -4.963856792480823,
     longitude: -39.02575945854149,
-    width: 1.5,
-    height: 1,
+    width: 0.4,
+    height: 0.26,
     scale: "1 1 1"
   },
   {
@@ -28,8 +28,8 @@ const AR_POINTS = [
     image: "assets/releitura-3.svg",
     latitude: -4.963856792480823,
     longitude: -39.02575945854149,
-    width: 1.5,
-    height: 1,
+    width: 0.4,
+    height: 0.26,
     scale: "1 1 1"
   }
 ];
@@ -80,7 +80,7 @@ closeButton?.addEventListener("click", () => {
 AFRAME.registerComponent("ar-point-manager", {
   schema: {
     maxDistance: { type: 'number', default: 50 },
-    minVisualDistance: { type: 'number', default: 4 },
+    minVisualDistance: { type: 'number', default: 2.5 },
     baseScale: { type: 'vec3', default: {x: 1, y: 1, z: 1} }
   },
   
@@ -105,14 +105,14 @@ AFRAME.registerComponent("ar-point-manager", {
       this.el.setAttribute("visible", "true");
     }
 
-    if (realDistance < this.data.minVisualDistance && realDistance > 0.1) {
-       let direction = new THREE.Vector3();
-       direction.subVectors(objectPos, cameraPos).normalize();
-       
-       let visualPos = new THREE.Vector3();
-       visualPos.addVectors(cameraPos, direction.multiplyScalar(this.data.minVisualDistance));
-       
-       this.el.object3D.position.lerp(visualPos, 0.1);
+    if (realDistance < this.data.minVisualDistance) {
+      let direction = new THREE.Vector3(0, 0, -1);
+      direction.applyQuaternion(cameraEl.object3D.quaternion);
+      
+      let targetPos = new THREE.Vector3();
+      targetPos.addVectors(cameraPos, direction.multiplyScalar(this.data.minVisualDistance));
+      
+      this.el.object3D.position.copy(targetPos);
     }
   }
 });
@@ -147,7 +147,7 @@ function buildARScene() {
     image.setAttribute("width", point.width);
     image.setAttribute("height", point.height);
     image.setAttribute("gps-new-entity-place", `latitude: ${point.latitude}; longitude: ${point.longitude}`);
-    image.setAttribute("ar-point-manager", `maxDistance: 50; minVisualDistance: 4; baseScale: ${point.scale}`);
+    image.setAttribute("ar-point-manager", `maxDistance: 50; minVisualDistance: 2.5; baseScale: ${point.scale}`);
     
     scene.appendChild(image);
   });
