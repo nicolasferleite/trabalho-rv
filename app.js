@@ -80,6 +80,12 @@ AFRAME.registerComponent("ar-point-manager", {
   
   init: function () {
     this.el.setAttribute('scale', this.data.baseScale);
+    
+    this.el.addEventListener('model-error', () => {
+      this.el.removeAttribute('gltf-model');
+      this.el.setAttribute('geometry', 'primitive: box; width: 0.5; height: 0.5; depth: 0.5');
+      this.el.setAttribute('material', 'color: red; metalness: 0.5; roughness: 0.2');
+    });
   },
   
   tick: function () {
@@ -120,7 +126,7 @@ function buildARScene() {
   scene.appendChild(ambientLight);
 
   const directionalLight = document.createElement("a-entity");
-  directionalLight.setAttribute("light", "type: directional; intensity: 1.0; castShadow: false");
+  directionalLight.setAttribute("light", "type: directional; intensity: 1.0");
   directionalLight.setAttribute("position", "1 4 3");
   scene.appendChild(directionalLight);
 
