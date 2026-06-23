@@ -1,207 +1,303 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#f8ead3" />
-  <title>Museu Histórico Jacinto de Sousa</title>
-  <meta name="description" content="Conheça o Museu Histórico Jacinto de Sousa, em Quixadá/CE, e acesse uma experiência de Realidade Aumentada com releituras de obras ao redor do Monumento do Trabalhador." />
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#f8ead3" />
+    <title>Museu Histórico Jacinto de Sousa</title>
+    <meta
+      name="description"
+      content="Conheça o Museu Histórico Jacinto de Sousa, em Quixadá/CE, e acesse uma experiência de Realidade Aumentada com releituras de obras ao redor do Monumento do Trabalhador."
+    />
 
-  <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css" />
 
-  <!-- A-Frame + AR.js location-based -->
-  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-  <script type="text/javascript" src="https://raw.githack.com/AR-js-org/AR.js/3.4.7/three.js/build/ar-threex-location-only.js"></script>
-  <script type="text/javascript" src="https://raw.githack.com/AR-js-org/AR.js/3.4.7/aframe/build/aframe-ar.js"></script>
-</head>
+    <!-- A-Frame + AR.js location-based -->
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://raw.githack.com/AR-js-org/AR.js/3.4.7/three.js/build/ar-threex-location-only.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://raw.githack.com/AR-js-org/AR.js/3.4.7/aframe/build/aframe-ar.js"
+    ></script>
+  </head>
 
-<body>
-  <main class="page-shell">
-    <header class="site-header" id="topo">
-      <a class="brand" href="#topo" aria-label="Museu Histórico Jacinto de Sousa">
-        <strong>Museu Histórico Jacinto de Sousa</strong>
-      </a>
+  <body>
+    <main class="page-shell">
+      <header class="site-header" id="topo">
+        <a
+          class="brand"
+          href="#topo"
+          aria-label="Museu Histórico Jacinto de Sousa"
+        >
+          <strong>Museu Histórico Jacinto de Sousa</strong>
+        </a>
 
-      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-nav">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+        <button
+          class="menu-toggle"
+          id="menu-toggle"
+          type="button"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+          aria-controls="main-nav"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
 
-      <nav class="nav" id="main-nav" aria-label="Navegação principal">
-        <a href="#sobre">O Museu</a>
-        <a href="#experiencia">Realidade Aumentada</a>
-        <a href="#localizacao">Visitação</a>
-      </nav>
-    </header>
+        <nav class="nav" id="main-nav" aria-label="Navegação principal">
+          <a href="#sobre">O Museu</a>
+          <a href="#experiencia">Realidade Aumentada</a>
+          <a href="#localizacao">Visitação</a>
+        </nav>
+      </header>
 
-    <section class="hero">
-      <div class="hero-content">
-        <img class="hero-logo" src="assets/logo-museu-jacinto.png" alt="Museu Histórico Jacinto de Sousa" />
-        <p class="eyebrow">Patrimônio histórico de Quixadá</p>
-        <h1>Memória, arte e cultura no coração do Sertão Central.</h1>
-        <p class="hero-text">
-          O Museu Histórico Jacinto de Sousa preserva narrativas, objetos e imagens que ajudam a contar
-          a história de Quixadá e de seu povo. A experiência digital propõe um encontro entre memória
-          e criação: três releituras de obras de Jacinto de Sousa em Realidade Aumentada ao redor do
-          Monumento do Trabalhador.
-        </p>
+      <section class="hero">
+        <div class="hero-content">
+          <img
+            class="hero-logo"
+            src="assets/logo-museu-jacinto.png"
+            alt="Museu Histórico Jacinto de Sousa"
+          />
+          <p class="eyebrow">Patrimônio histórico de Quixadá</p>
+          <h1>Memória, arte e cultura no coração do Sertão Central.</h1>
+          <p class="hero-text">
+            O Museu Histórico Jacinto de Sousa preserva narrativas, objetos e
+            imagens que ajudam a contar a história de Quixadá e de seu povo. A
+            experiência digital propõe um encontro entre memória e criação: três
+            releituras de obras de Jacinto de Sousa em Realidade Aumentada ao
+            redor do Monumento do Trabalhador.
+          </p>
 
-        <div class="hero-actions">
-          <a class="button primary" href="#experiencia">Ver releituras em RA</a>
-          <a class="button ghost" target="_blank" rel="noopener noreferrer" href="https://docs.google.com/forms/d/e/1FAIpQLSdxwVWngnsEBjhyl7JMTte2IICVawH4L8pCZAaVVoRQlrX1gw/viewform">Agende a visita</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="sobre">
-      <div class="section-heading">
-        <p class="eyebrow">O museu</p>
-        <h2>Uma casa de memória para Quixadá.</h2>
-        <p>
-          Inicialmente casa familiar, a construção secular datada de 1922 cedia há décadas um dos principais
-          pontos turísticos da cidade. Instituída como Museu Histórico em 1984, somando-se posteriormente
-          o nome de Jacinto de Sousa, importante artista quixadaense, a instituição tornou-se referência
-          para a preservação da memória local.
-        </p>
-
-        <p>
-          O Museu reúne, conserva e disponibiliza acervo histórico-cultural com cinco salas permanentes e
-          duas temporárias, retratando especialmente parte da história do município. Atua também como
-          espaço socioeducativo, aproximando comunidade, visitantes, estudantes e pesquisadores da cultura
-          de Quixadá.
-        </p>
-      </div>
-
-      <div class="grid-3">
-        <article class="info-card">
-          <h3>Patrimônio cultural</h3>
-          <p>Uma construção histórica que guarda memórias, objetos e narrativas do município.</p>
-        </article>
-        <article class="info-card">
-          <h3>Acervo histórico-cultural</h3>
-          <p>Cinco salas permanentes e duas temporárias dedicadas à história, à cultura e à memória local.</p>
-        </article>
-        <article class="info-card">
-          <h3>Espaço socioeducativo</h3>
-          <p>Um ambiente de visitação, pesquisa e educação patrimonial para moradores e visitantes.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section ar-section" id="experiencia">
-      <div class="section-heading">
-        <p class="eyebrow">Realidade aumentada</p>
-        <h2>No Monumento do Trabalhador, três releituras ganham presença digital.</h2>
-        <p>
-          A experiência usa câmera e localização para posicionar três releituras de obras de Jacinto de Sousa
-          ao redor do monumento. Ao caminhar pelo espaço, o visitante encontra cada imagem como uma nova
-          camada de leitura sobre arte, trabalho e memória.
-        </p>
-      </div>
-
-      <div class="ar-layout">
-        <div class="ar-preview" aria-hidden="true">
-          <div class="phone-frame">
-            <div class="phone-top"></div>
-            <div class="camera-placeholder">
-              <span>Releituras em RA</span>
-              <small>Ao redor do Monumento do Trabalhador</small>
-            </div>
+          <div class="hero-actions">
+            <a class="button primary" href="#experiencia"
+              >Ver releituras em RA</a
+            >
+            <a
+              class="button ghost"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdxwVWngnsEBjhyl7JMTte2IICVawH4L8pCZAaVVoRQlrX1gw/viewform"
+              >Agende a visita</a
+            >
           </div>
         </div>
+      </section>
 
-        <div class="ar-panel">
-          <h3>Antes de começar</h3>
-          <ol>
-            <li>Use um celular com acesso à internet.</li>
-            <li>Vá até o Monumento do Trabalhador, de Jacinto de Sousa.</li>
-            <li>Permita câmera e localização quando o navegador solicitar.</li>
-            <li>Caminhe ao redor do monumento para encontrar as três releituras.</li>
-          </ol>
-
-          <button class="button primary wide" id="start-ar" type="button">
-            Abrir câmera para ver as releituras
-          </button>
-
-          <p class="ar-note">
-            A câmera abre em tela cheia. Para sair, toque no botão de fechar no topo da tela.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section location-section" id="localizacao">
-      <div class="location-card">
-        <div class="location-main">
-          <p class="eyebrow">Visitação</p>
-          <h2>Agende sua visita ao Museu Histórico Jacinto de Sousa.</h2>
+      <section class="section" id="sobre">
+        <div class="section-heading">
+          <p class="eyebrow">O museu</p>
+          <h2>Uma casa de memória para Quixadá.</h2>
           <p>
-            Cultura, história e memória em um espaço dedicado à preservação do patrimônio cultural de Quixadá.
+            Inicialmente casa familiar, a construção secular datada de 1922
+            cedia há décadas um dos principais pontos turísticos da cidade.
+            Instituída como Museu Histórico em 1984, somando-se posteriormente o
+            nome de Jacinto de Sousa, importante artista quixadaense, a
+            instituição tornou-se referência para a preservação da memória
+            local.
           </p>
 
-          <div class="visit-details">
-            <div class="detail-group">
-              <strong>Localização</strong>
-              <span>Rua Autran Moreno, 202, Centro — Quixadá/CE</span>
-            </div>
+          <p>
+            O Museu reúne, conserva e disponibiliza acervo histórico-cultural
+            com cinco salas permanentes e duas temporárias, retratando
+            especialmente parte da história do município. Atua também como
+            espaço socioeducativo, aproximando comunidade, visitantes,
+            estudantes e pesquisadores da cultura de Quixadá.
+          </p>
+        </div>
 
-            <div class="detail-group">
-              <strong>Horários de funcionamento</strong>
-              <ul class="hours-list">
-                <li><span>Terça e quarta</span><b>8h às 17h</b></li>
-                <li><span>Quinta e sexta</span><b>8h às 21h</b></li>
-                <li><span>Sábado e domingo</span><b>9h às 13h</b></li>
-              </ul>
-              <small>Não abrimos às segundas-feiras para o público.</small>
-            </div>
+        <div class="grid-3">
+          <article class="info-card">
+            <h3>Patrimônio cultural</h3>
+            <p>
+              Uma construção histórica que guarda memórias, objetos e narrativas
+              do município.
+            </p>
+          </article>
+          <article class="info-card">
+            <h3>Acervo histórico-cultural</h3>
+            <p>
+              Cinco salas permanentes e duas temporárias dedicadas à história, à
+              cultura e à memória local.
+            </p>
+          </article>
+          <article class="info-card">
+            <h3>Espaço socioeducativo</h3>
+            <p>
+              Um ambiente de visitação, pesquisa e educação patrimonial para
+              moradores e visitantes.
+            </p>
+          </article>
+        </div>
+      </section>
 
-            <div class="detail-group">
-              <strong>Mais informações</strong>
-              <ul class="contact-list">
-                <li><a href="mailto:museuhistoricojacintodesousa@gmail.com">museuhistoricojacintodesousa@gmail.com</a></li>
-                <li><a href="tel:+5588981843930">(88) 98184-3930</a></li>
-                <li><a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/museujacintodesousa/">@museujacintodesousa</a></li>
-              </ul>
+      <section class="section ar-section" id="experiencia">
+        <div class="section-heading">
+          <p class="eyebrow">Realidade aumentada</p>
+          <h2>
+            No Monumento do Trabalhador, três releituras ganham presença
+            digital.
+          </h2>
+          <p>
+            A experiência usa câmera e localização para posicionar três
+            releituras de obras de Jacinto de Sousa ao redor do monumento. Ao
+            caminhar pelo espaço, o visitante encontra cada imagem como uma nova
+            camada de leitura sobre arte, trabalho e memória.
+          </p>
+        </div>
+
+        <div class="ar-layout">
+          <div class="ar-preview" aria-hidden="true">
+            <div class="phone-mockup">
+              <img class="phone-frame-svg" src="assets/celular.svg" alt="" />
+
+              <img
+                class="phone-print"
+                src="assets/print.jpg"
+                alt="Prévia da aplicação"
+              />
             </div>
           </div>
-        </div>
 
-        <div class="location-actions">
-          <a class="button primary" target="_blank" rel="noopener noreferrer" href="https://docs.google.com/forms/d/e/1FAIpQLSdxwVWngnsEBjhyl7JMTte2IICVawH4L8pCZAaVVoRQlrX1gw/viewform">
-            Agende a visita
-          </a>
-          <a class="button ghost" target="_blank" rel="noopener noreferrer"
-             href="https://www.google.com/maps/search/?api=1&query=Museu%20Hist%C3%B3rico%20Jacinto%20de%20Sousa%20Rua%20Autran%20Moreno%20202%20Centro%20Quixad%C3%A1%20CE">
-            Abrir no mapa
-          </a>
+          <div class="ar-panel">
+            <h3>Antes de começar</h3>
+            <ol>
+              <li>Use um celular com acesso à internet.</li>
+              <li>Vá até o Monumento do Trabalhador, de Jacinto de Sousa.</li>
+              <li>
+                Permita câmera e localização quando o navegador solicitar.
+              </li>
+              <li>
+                Caminhe ao redor do monumento para encontrar as três releituras.
+              </li>
+            </ol>
+
+            <button class="button primary wide" id="start-ar" type="button">
+              Abrir câmera para ver as releituras
+            </button>
+
+            <p class="ar-note">
+              A câmera abre em tela cheia. Para sair, toque no botão de fechar
+              no topo da tela.
+            </p>
+          </div>
         </div>
+      </section>
+
+      <section class="section location-section" id="localizacao">
+        <div class="location-card">
+          <div class="location-main">
+            <p class="eyebrow">Visitação</p>
+            <h2>Agende sua visita ao Museu Histórico Jacinto de Sousa.</h2>
+            <p>
+              Cultura, história e memória em um espaço dedicado à preservação do
+              patrimônio cultural de Quixadá.
+            </p>
+
+            <div class="visit-details">
+              <div class="detail-group">
+                <strong>Localização</strong>
+                <span>Rua Autran Moreno, 202, Centro — Quixadá/CE</span>
+              </div>
+
+              <div class="detail-group">
+                <strong>Horários de funcionamento</strong>
+                <ul class="hours-list">
+                  <li><span>Terça e quarta</span><b>8h às 17h</b></li>
+                  <li><span>Quinta e sexta</span><b>8h às 21h</b></li>
+                  <li><span>Sábado e domingo</span><b>9h às 13h</b></li>
+                </ul>
+                <small>Não abrimos às segundas-feiras para o público.</small>
+              </div>
+
+              <div class="detail-group">
+                <strong>Mais informações</strong>
+                <ul class="contact-list">
+                  <li>
+                    <a href="mailto:museuhistoricojacintodesousa@gmail.com"
+                      >museuhistoricojacintodesousa@gmail.com</a
+                    >
+                  </li>
+                  <li><a href="tel:+5588981843930">(88) 98184-3930</a></li>
+                  <li>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://www.instagram.com/museujacintodesousa/"
+                      >@museujacintodesousa</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="location-actions">
+            <a
+              class="button primary"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdxwVWngnsEBjhyl7JMTte2IICVawH4L8pCZAaVVoRQlrX1gw/viewform"
+            >
+              Agende a visita
+            </a>
+            <a
+              class="button ghost"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.google.com/maps/search/?api=1&query=Museu%20Hist%C3%B3rico%20Jacinto%20de%20Sousa%20Rua%20Autran%20Moreno%20202%20Centro%20Quixad%C3%A1%20CE"
+            >
+              Abrir no mapa
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>Museu Histórico Jacinto de Sousa • Cultura, História e Memória</p>
+        <a href="#topo">Voltar ao topo</a>
+      </footer>
+    </main>
+
+    <!-- Camada full-screen da câmera/RA -->
+    <section
+      class="ar-overlay"
+      id="ar-overlay"
+      aria-label="Realidade aumentada"
+      hidden
+    >
+      <div class="ar-toolbar">
+        <div>
+          <strong>Releituras em Realidade Aumentada</strong>
+          <small
+            >Aponte a câmera ao redor do monumento para visualizar as
+            obras.</small
+          >
+        </div>
+        <button
+          id="close-ar"
+          class="close-button"
+          type="button"
+          aria-label="Fechar RA"
+        >
+          ×
+        </button>
       </div>
+
+      <div class="ar-permission-note" id="ar-note">
+        Para usar a experiência, permita câmera e localização. O site precisa
+        estar em HTTPS.
+      </div>
+
+      <div id="ar-root"></div>
     </section>
 
-    <footer class="footer">
-      <p>Museu Histórico Jacinto de Sousa • Cultura, História e Memória</p>
-      <a href="#topo">Voltar ao topo</a>
-    </footer>
-  </main>
-
-  <!-- Camada full-screen da câmera/RA -->
-  <section class="ar-overlay" id="ar-overlay" aria-label="Realidade aumentada" hidden>
-    <div class="ar-toolbar">
-      <div>
-        <strong>Releituras em Realidade Aumentada</strong>
-        <small>Aponte a câmera ao redor do monumento para visualizar as obras.</small>
-      </div>
-      <button id="close-ar" class="close-button" type="button" aria-label="Fechar RA">×</button>
-    </div>
-
-    <div class="ar-permission-note" id="ar-note">
-      Para usar a experiência, permita câmera e localização. O site precisa estar em HTTPS.
-    </div>
-
-    <div id="ar-root"></div>
-  </section>
-
-  <script src="app.js"></script>
-</body>
+    <script src="app.js"></script>
+  </body>
 </html>

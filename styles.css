@@ -923,3 +923,27 @@ h3 {
     font-size: 1.45rem;
   }
 }
+
+.phone-mockup {
+  position: relative;
+  width: min(100%, 320px);
+}
+
+.phone-frame-svg {
+  width: 100%;
+  display: block;
+}
+
+.phone-print {
+  position: absolute;
+  /*ajustarconformeseuSVG*/top: 2.2%;
+  left: 5%;
+  width: 90%;
+  height: 96.4%;
+  object-fit: cover;
+  border-radius: 40px;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  -ms-border-radius: 40px;
+  -o-border-radius: 40px;
+}
