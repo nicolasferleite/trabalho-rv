@@ -11,7 +11,7 @@ const AR_POINTS = [
   {
     id: "ponto-releitura-svg",
     type: "image",
-    source: "releitura-1.svg",
+    source: "assets/releitura-1.svg",
     latitude: -4.963910, // Exemplo: ligeiramente deslocado na praça
     longitude: -39.025810,
     scale: "2 2 1" // Para imagens: largura, altura, profundidade
@@ -19,7 +19,7 @@ const AR_POINTS = [
   {
     id: "ponto-alma-nordestina",
     type: "image",
-    source: "alma-nordestina.jpg", // Nome do arquivo de imagem que você salv
+    source: "assets/alma-nordestina.jpg", // Nome do arquivo de imagem que você salv
     latitude: -4.963750, // Exemplo: outro canto da praça
     longitude: -39.025650,
     scale: "1 1 1"
