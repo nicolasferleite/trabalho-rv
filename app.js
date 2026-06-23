@@ -3,22 +3,25 @@ const AR_POINTS = [
     id: "ponto-retirantes-3d",
     type: "gltf",
     source: "assets/retirantes.glb",
-    latitude: -4.969391247277808,
-    longitude: -39.01216264200814,
+    // Afastado um pouco mais para o Sul/Oeste
+    latitude: -4.969550,
+    longitude: -39.012350,
     scale: "6 6 6",
   },
   {
     id: "ponto-o-sertanejo",
     type: "video",
     source: "assets/o-sertanejo.mp4",
-    latitude: -4.968953063973654,
-    longitude: -39.01220780416512,
+    // Movido um pouco mais para o Norte/Leste
+    latitude: -4.968750,
+    longitude: -39.011950,
     scale: "5 5 1",
   },
   {
     id: "ponto-alma-nordestina",
     type: "image",
     source: "assets/alma-nordestina.jpg",
+    // Mantido como o "centro" de referência original
     latitude: -4.969115582527809,
     longitude: -39.012103282263524,
     scale: "4 6 1",
