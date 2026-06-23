@@ -1,21 +1,21 @@
 const AR_POINTS = [
   {
     id: "ra-releitura-1",
-    model: "assets/teste-carro.gltf", // Correção 1: Caminho da pasta
+    model: "assets/retirantes.glb", // Correção 1: Caminho da pasta
     latitude: -4.963856792480823,
     longitude: -39.02575945854149,
     scale: "1 1 1" // Correção 5: Reduzido para teste de colisão
   },
   {
     id: "ra-releitura-2",
-    model: "assets/teste-carro.gltf",
+    model: "assets/retirantes.glb",
     latitude: -4.963856792480823,
     longitude: -39.02575945854149,
     scale: "1 1 1"
   },
   {
     id: "ra-releitura-3",
-    model: "assets/teste-carro.gltf",
+    model: "assets/retirantes.glb",
     latitude: -4.963856792480823,
     longitude: -39.02575945854149,
     scale: "1 1 1"
