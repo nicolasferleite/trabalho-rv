@@ -3,27 +3,24 @@ const AR_POINTS = [
     id: "ponto-retirantes-3d",
     type: "gltf",
     source: "assets/retirantes.glb",
-    // Ponto 1 (Norte da praça)
-    // latitude: -4.96501709665089,
-    // longitude: -39.01037715626991,
+    latitude: -4.96501709665089,
+    longitude: -39.01037715626991,
     scale: "10 10 10",
   },
   {
     id: "ponto-o-sertanejo",
     type: "video",
     source: "assets/o-sertanejo.mp4",
-    // Ponto 2 (Oeste/Sudoeste)
-    // latitude: -4.96501709665089,
-    // longitude: -39.01037715626991,
+    latitude: -4.968953063973654,
+    longitude: -39.01220780416512,
     scale: "7 7 1",
   },
   {
     id: "ponto-alma-nordestina",
     type: "image",
     source: "assets/alma-nordestina.jpg",
-    // Ponto 4 (Sul da praça)
-    latitude: -4.96501709665089,
-    longitude: -39.01037715626991,
+    latitude: -4.969115582527809,
+    longitude: -39.012103282263524,
     scale: "6 8 1",
   },
 ];
