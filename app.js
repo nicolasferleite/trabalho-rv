@@ -3,8 +3,8 @@ const AR_POINTS = [
     id: "ponto-retirantes-3d",
     type: "gltf",
     source: "assets/retirantes.glb",
-    latitude: -4.96501709665089,
-    longitude: -39.01037715626991,
+    latitude: -4.969391247277808,
+    longitude: -39.01216264200814,
     scale: "10 10 10",
   },
   {
