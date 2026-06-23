@@ -3,25 +3,25 @@ const AR_POINTS = [
     id: "ponto-retirantes-3d",
     type: "gltf",
     source: "assets/retirantes.glb",
-    // Afastado um pouco mais para o Sul/Oeste
-    latitude: -4.969550,
-    longitude: -39.012350,
+    // Movemos consideravelmente para o Oeste (longitude mais negativa) e um pouco mais para o Sul
+    latitude: -4.969750,
+    longitude: -39.012850, 
     scale: "6 6 6",
   },
   {
     id: "ponto-o-sertanejo",
     type: "video",
     source: "assets/o-sertanejo.mp4",
-    // Movido um pouco mais para o Norte/Leste
-    latitude: -4.968750,
-    longitude: -39.011950,
+    // Afastamos mais um pouco para o Norte (latitude menos negativa) e Leste
+    latitude: -4.968550,
+    longitude: -39.011750,
     scale: "5 5 1",
   },
   {
     id: "ponto-alma-nordestina",
     type: "image",
     source: "assets/alma-nordestina.jpg",
-    // Mantido como o "centro" de referência original
+    // Mantido como o centro/âncora original da Praça
     latitude: -4.969115582527809,
     longitude: -39.012103282263524,
     scale: "4 6 1",
