@@ -312,6 +312,7 @@ h3 {
 .ar-preview {
   display: grid;
   place-items: center;
+  width: 100%;
 }
 
 .phone-frame {
@@ -552,6 +553,12 @@ h3 {
   .hero,
   .ar-layout {
     grid-template-columns: 1fr;
+  }
+
+  .ar-preview {
+    width: 100%;
+    justify-items: center;
+    padding-inline: 0;
   }
 
   .hero {
@@ -905,7 +912,7 @@ h3 {
   }
 
   .section {
-    padding: 56px 0;
+    padding: 56px 12px;
   }
 
   .location-actions {
@@ -937,6 +944,7 @@ h3 {
 .phone-mockup {
   position: relative;
   width: min(100%, 320px);
+  margin-inline: auto;
 }
 
 .phone-frame-svg {
