@@ -99,6 +99,30 @@ AFRAME.registerComponent("ar-point-manager", {
   },
 });
 
+// ==========================================
+// NOVO: Componente para limitar a distância a 20 metros
+// ==========================================
+AFRAME.registerComponent("limitar-distancia", {
+  schema: {
+    maxDist: { type: "number", default: 20 }
+  },
+  tick: function () {
+    // Pega a câmera do AR.js
+    const cameraEl = this.el.sceneEl.querySelector("[gps-new-camera]");
+    if (!cameraEl) return;
+
+    // Distância tridimensional no mundo virtual (A-Frame mapeia 1 metro do real para 1 unidade do 3D)
+    const dist = this.el.object3D.position.distanceTo(cameraEl.object3D.position);
+
+    // Se estiver a mais de 20m, esconde o objeto. Se menos, mostra.
+    if (dist > this.data.maxDist) {
+      this.el.setAttribute("visible", "false");
+    } else {
+      this.el.setAttribute("visible", "true");
+    }
+  }
+});
+
 // 5. Construção Dinâmica da Cena de RA
 function buildARScene() {
   const scene = document.createElement("a-scene");
@@ -123,15 +147,9 @@ function buildARScene() {
   directionalLight.setAttribute("position", "0 10 0");
   scene.appendChild(directionalLight);
 
-  // Câmera GPS Atualizada
+  // Câmera GPS
   const camera = document.createElement("a-camera");
-  
-  // Define o alcance de renderização (far) explicitamente para longe (ex: 3000 metros)
-  camera.setAttribute("camera", "near: 0.1; far: 3000;");
-  
-  // Mantém a sua lógica de atualização de movimento do GPS
   camera.setAttribute("gps-new-camera", "gpsMinDistance: 1");
-  
   scene.appendChild(camera);
 
   // Renderização dos pontos pela praça
@@ -145,8 +163,6 @@ function buildARScene() {
     } else if (point.type === "image") {
       entity = document.createElement("a-image");
       entity.setAttribute("src", `${point.source}?v=${Date.now()}`);
-
-      // Força o material a ser plano ("flat") para corrigir o bug da imagem preta
       entity.setAttribute(
         "material",
         "shader: flat; transparent: true; side: double;",
@@ -157,7 +173,7 @@ function buildARScene() {
       entity.setAttribute("height", sizes[1] || "2");
 
       entity.setAttribute("look-at", "[gps-new-camera]");
-      entity.setAttribute("position", "0 1 0"); // Eleva 1 metro do chão
+      entity.setAttribute("position", "0 1 0"); 
     } else if (point.type === "video") {
       entity = document.createElement("a-video");
       entity.setAttribute("src", `${point.source}?v=${Date.now()}`);
@@ -171,7 +187,7 @@ function buildARScene() {
       entity.setAttribute("height", sizes[1] || "2");
 
       entity.setAttribute("look-at", "[gps-new-camera]");
-      entity.setAttribute("position", "0 1 0"); // Eleva 1 metro do chão
+      entity.setAttribute("position", "0 1 0");
     }
 
     if (entity) {
@@ -179,6 +195,10 @@ function buildARScene() {
         "gps-new-entity-place",
         `latitude: ${point.latitude}; longitude: ${point.longitude}`,
       );
+      
+      // Aplica o limitador de 20 metros em todas as entidades geradas
+      entity.setAttribute("limitar-distancia", "maxDist: 20");
+      
       scene.appendChild(entity);
     }
   });
