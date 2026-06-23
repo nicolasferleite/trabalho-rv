@@ -4,8 +4,8 @@ const AR_POINTS = [
     type: "gltf",
     source: "assets/retirantes.glb",
     // Ponto 1 (Norte da praça)
-    latitude: -4.96501709665089,
-    longitude: -39.01037715626991,
+    // latitude: -4.96501709665089,
+    // longitude: -39.01037715626991,
     scale: "10 10 10",
   },
   {
@@ -13,8 +13,8 @@ const AR_POINTS = [
     type: "image",
     source: "assets/o-sertanejo.gif",
     // Ponto 2 (Oeste/Sudoeste)
-    // latitude: -4.96501709665089,
-    // longitude: -39.01037715626991,
+    latitude: -4.96501709665089,
+    longitude: -39.01037715626991,
     scale: "3 3 1",
   },
   {
