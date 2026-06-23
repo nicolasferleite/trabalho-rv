@@ -12,7 +12,7 @@ const AR_POINTS = [
   {
     id: "ponto-releitura-1",
     type: "image",
-    source: "releitura-1.svg", 
+    source: "assets/releitura-1.svg", 
     latitude: -4.963910, 
     longitude: -39.025810,
     scale: "2 2 1" 
@@ -20,7 +20,7 @@ const AR_POINTS = [
   {
     id: "ponto-releitura-2",
     type: "image",
-    source: "releitura-2.svg", 
+    source: "assets/releitura-2.svg", 
     // Afastado da imagem 1 e reposicionado estrategicamente no meio da cena
     latitude: -4.963800, 
     longitude: -39.025700,
@@ -29,7 +29,7 @@ const AR_POINTS = [
   {
     id: "ponto-alma-nordestina",
     type: "image",
-    source: "alma-nordestina.jpg", 
+    source: "assets/alma-nordestina.jpg", 
     latitude: -4.964000, 
     longitude: -39.025500,
     scale: "1.5 2 1" 
