@@ -123,9 +123,15 @@ function buildARScene() {
   directionalLight.setAttribute("position", "0 10 0");
   scene.appendChild(directionalLight);
 
-  // Câmera GPS
+  // Câmera GPS Atualizada
   const camera = document.createElement("a-camera");
+  
+  // Define o alcance de renderização (far) explicitamente para longe (ex: 3000 metros)
+  camera.setAttribute("camera", "near: 0.1; far: 3000;");
+  
+  // Mantém a sua lógica de atualização de movimento do GPS
   camera.setAttribute("gps-new-camera", "gpsMinDistance: 1");
+  
   scene.appendChild(camera);
 
   // Renderização dos pontos pela praça
