@@ -16,6 +16,7 @@ const AR_POINTS = [
     latitude: -4.968950,
     longitude: -39.012250,
     scale: "5 5 1",
+    rotation: "0 0 0",
   },
   {
     id: "ponto-alma-nordestina",
@@ -169,6 +170,9 @@ function buildARScene() {
 
       entity.setAttribute("look-at", "[gps-new-camera]");
       entity.setAttribute("position", "0 1 0"); // Eleva 1 metro do chão
+
+      entity.setAttribute("rotation", point.rotation || "0 0 0");
+      entity.setAttribute("position", "0 1 0");
     }
 
     if (entity) {
