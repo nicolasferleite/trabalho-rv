@@ -3,7 +3,7 @@ const AR_POINTS = [
     id: "ponto-retirantes-3d",
     type: "gltf",
     source: "assets/retirantes.glb",
-    // Puxado mais para o Norte e Leste (ficando mais perto do ponto 2 e 3)
+    // Mantido na posição que você aprovou
     latitude: -4.969150,
     longitude: -39.012350, 
     scale: "6 6 6",
@@ -12,18 +12,18 @@ const AR_POINTS = [
     id: "ponto-o-sertanejo",
     type: "video",
     source: "assets/o-sertanejo.mp4",
-    // Mantido fixo como a nova âncora de aproximação
-    latitude: -4.968550,
-    longitude: -39.011750,
+    // Puxado para perto do modelo 3D, mas ligeiramente ao Norte
+    latitude: -4.968950,
+    longitude: -39.012250,
     scale: "5 5 1",
   },
   {
     id: "ponto-alma-nordestina",
     type: "image",
     source: "assets/alma-nordestina.jpg",
-    // Puxado um pouco mais para o Norte e Leste (em direção ao ponto 2)
-    latitude: -4.968850,
-    longitude: -39.011950,
+    // Trazido para perto, mas afastado do vídeo (mais ao Sul/Leste)
+    latitude: -4.969100,
+    longitude: -39.012050,
     scale: "4 6 1",
   },
 ];
