@@ -129,7 +129,12 @@ function buildARScene() {
 
   // Câmera GPS
   const camera = document.createElement("a-camera");
-  camera.setAttribute("gps-new-camera", "gpsMinDistance: 1");
+  camera.setAttribute("look-controls-enabled", "false");
+  camera.setAttribute(
+    "arjs-device-orientation-controls",
+    "smoothingFactor: 0.1",
+  );
+  camera.setAttribute("gps-new-camera", "gpsMinDistance: 5");
   scene.appendChild(camera);
 
   // Renderização dos pontos pela praça
@@ -140,6 +145,7 @@ function buildARScene() {
       entity = document.createElement("a-entity");
       entity.setAttribute("gltf-model", `url(${point.source}?v=${Date.now()})`);
       entity.setAttribute("ar-point-manager", `baseScale: ${point.scale}`);
+      entity.setAttribute("look-at", "[gps-new-camera]");
     } else if (point.type === "image") {
       entity = document.createElement("a-image");
       entity.setAttribute("src", `${point.source}?v=${Date.now()}`);
