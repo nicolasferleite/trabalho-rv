@@ -146,6 +146,9 @@ function buildARScene() {
       entity.setAttribute("gltf-model", `url(${point.source}?v=${Date.now()})`);
       entity.setAttribute("ar-point-manager", `baseScale: ${point.scale}`);
       entity.setAttribute("look-at", "[gps-new-camera]");
+      if (point.rotation) {
+        entity.setAttribute("rotation", point.rotation);
+      }
     } else if (point.type === "image") {
       entity = document.createElement("a-image");
       entity.setAttribute("src", `${point.source}?v=${Date.now()}`);
@@ -160,6 +163,9 @@ function buildARScene() {
       entity.setAttribute("width", sizes[0] || "2");
       entity.setAttribute("height", sizes[1] || "2");
 
+      if (point.rotation) {
+        entity.setAttribute("rotation", point.rotation);
+      }
       entity.setAttribute("look-at", "[gps-new-camera]");
       entity.setAttribute("position", "0 1 0"); // Eleva 1 metro do chão
     } else if (point.type === "video") {
@@ -174,6 +180,9 @@ function buildARScene() {
       entity.setAttribute("width", sizes[0] || "2");
       entity.setAttribute("height", sizes[1] || "2");
 
+      if (point.rotation) {
+        entity.setAttribute("rotation", point.rotation);
+      }
       entity.setAttribute("look-at", "[gps-new-camera]");
       entity.setAttribute("position", "0 1 0"); // Eleva 1 metro do chão
     }
