@@ -13,18 +13,18 @@ const AR_POINTS = [
     type: "video",
     source: "assets/o-sertanejo.mp4",
     // Ponto 2 (Oeste/Sudoeste)
-    latitude: -4.96501709665089,
-    longitude: -39.01037715626991,
-    scale: "3 3 1",
+    // latitude: -4.96501709665089,
+    // longitude: -39.01037715626991,
+    scale: "7 7 1",
   },
   {
     id: "ponto-alma-nordestina",
     type: "image",
     source: "assets/alma-nordestina.jpg",
     // Ponto 4 (Sul da praça)
-    // latitude: -4.96501709665089,
-    // longitude: -39.01037715626991,
-    scale: "3 4 1",
+    latitude: -4.96501709665089,
+    longitude: -39.01037715626991,
+    scale: "6 8 1",
   },
 ];
 
