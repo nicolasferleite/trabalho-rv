@@ -5,7 +5,7 @@ const AR_POINTS = [
     source: "assets/retirantes.glb",
     latitude: -4.969391247277808,
     longitude: -39.01216264200814,
-    scale: "10 10 10",
+    scale: "6 6 6",
   },
   {
     id: "ponto-o-sertanejo",
@@ -13,7 +13,7 @@ const AR_POINTS = [
     source: "assets/o-sertanejo.mp4",
     latitude: -4.968953063973654,
     longitude: -39.01220780416512,
-    scale: "7 7 1",
+    scale: "5 5 1",
   },
   {
     id: "ponto-alma-nordestina",
@@ -21,7 +21,7 @@ const AR_POINTS = [
     source: "assets/alma-nordestina.jpg",
     latitude: -4.969115582527809,
     longitude: -39.012103282263524,
-    scale: "6 8 1",
+    scale: "4 6 1",
   },
 ];
 
