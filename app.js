@@ -10,8 +10,8 @@ const AR_POINTS = [
   },
   {
     id: "ponto-sertanejo",
-    type: "image",
-    source: "assets/o-sertanejo.gif",
+    type: "video",
+    source: "assets/o-sertanejo.mp4",
     // Ponto 2 (Oeste/Sudoeste)
     latitude: -4.96501709665089,
     longitude: -39.01037715626991,
@@ -148,6 +148,20 @@ function buildARScene() {
         "material",
         "shader: flat; transparent: true; side: double;",
       );
+
+      const sizes = point.scale.split(" ");
+      entity.setAttribute("width", sizes[0] || "2");
+      entity.setAttribute("height", sizes[1] || "2");
+
+      entity.setAttribute("look-at", "[gps-new-camera]");
+      entity.setAttribute("position", "0 1 0"); // Eleva 1 metro do chão
+    } else if (point.type === "video") {
+      entity = document.createElement("a-video");
+      entity.setAttribute("src", `${point.source}?v=${Date.now()}`);
+      entity.setAttribute("autoplay", "true");
+      entity.setAttribute("loop", "true");
+      entity.setAttribute("muted", "true");
+      entity.setAttribute("playsinline", "true");
 
       const sizes = point.scale.split(" ");
       entity.setAttribute("width", sizes[0] || "2");
