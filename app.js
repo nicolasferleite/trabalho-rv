@@ -17,9 +17,9 @@ const AR_POINTS = [
     scale: "2 2 1" // Para imagens: largura, altura, profundidade
   },
   {
-    id: "ponto-teste-carro",
-    type: "gltf",
-    source: "teste-carro.gltf",
+    id: "ponto-alma-nordestina",
+    type: "image",
+    source: "alma-nordestina.jpg", // Nome do arquivo de imagem que você salv
     latitude: -4.963750, // Exemplo: outro canto da praça
     longitude: -39.025650,
     scale: "1 1 1"
