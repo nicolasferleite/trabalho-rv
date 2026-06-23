@@ -168,9 +168,6 @@ function buildARScene() {
       entity.setAttribute("width", sizes[0] || "2");
       entity.setAttribute("height", sizes[1] || "2");
 
-      entity.setAttribute("look-at", "[gps-new-camera]");
-      entity.setAttribute("position", "0 1 0"); // Eleva 1 metro do chão
-
       entity.setAttribute("rotation", point.rotation || "0 0 0");
       entity.setAttribute("position", "0 1 0");
     }
