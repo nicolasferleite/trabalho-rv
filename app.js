@@ -1,30 +1,24 @@
-/*
-  Pontos da experiência em Realidade Aumentada.
-  As imagens representam as três releituras e aparecem apenas dentro da câmera/RA.
-  Quando tiver as coordenadas finais, altere latitude e longitude abaixo.
-*/
-
 const AR_POINTS = [
   {
     id: "ra-releitura-1",
-    model: "teste-carro.gltf",
+    model: "assets/teste-carro.gltf", // Correção 1: Caminho da pasta
     latitude: -4.963856792480823,
     longitude: -39.02575945854149,
-    scale: "5 5 5"
+    scale: "1 1 1" // Correção 5: Reduzido para teste de colisão
   },
   {
     id: "ra-releitura-2",
-    model: "teste-carro.gltf",
+    model: "assets/teste-carro.gltf",
     latitude: -4.963856792480823,
     longitude: -39.02575945854149,
-    scale: "5 5 5"
+    scale: "1 1 1"
   },
   {
     id: "ra-releitura-3",
-    model: "teste-carro.gltf",
+    model: "assets/teste-carro.gltf",
     latitude: -4.963856792480823,
     longitude: -39.02575945854149,
-    scale: "5 5 5"
+    scale: "1 1 1"
   }
 ];
 
@@ -64,6 +58,11 @@ startButton?.addEventListener("click", () => {
     buildARScene();
     arRoot.dataset.loaded = "true";
   }
+
+  // Correção 4: Força o canvas do WebGL a entender que a tela abriu
+  setTimeout(() => {
+    window.dispatchEvent(new Event('resize'));
+  }, 200);
 });
 
 closeButton?.addEventListener("click", () => {
@@ -73,18 +72,20 @@ closeButton?.addEventListener("click", () => {
 
 AFRAME.registerComponent("ar-point-manager", {
   schema: {
-    visualDistance: { type: 'number', default: 3 },
-    baseScale: { type: 'vec3', default: {x: 5, y: 5, z: 5} },
+    visualDistance: { type: 'number', default: 4 },
+    baseScale: { type: 'vec3', default: {x: 1, y: 1, z: 1} },
     index: { type: 'number', default: 0 }
   },
   
   init: function () {
     this.el.setAttribute('scale', this.data.baseScale);
     
+    // Sistema de fallback: Se o GLTF falhar, vira um cubo vermelho
     this.el.addEventListener('model-error', () => {
+      console.warn("Falha ao carregar GLTF. Exibindo cubo de fallback.");
       this.el.removeAttribute('gltf-model');
-      this.el.setAttribute('geometry', 'primitive: box; width: 0.5; height: 0.5; depth: 0.5');
-      this.el.setAttribute('material', 'color: red; metalness: 0.5; roughness: 0.2');
+      this.el.setAttribute('geometry', 'primitive: box; width: 0.8; height: 0.8; depth: 0.8');
+      this.el.setAttribute('material', 'color: #ff0044; metalness: 0.1; roughness: 0.5');
     });
   },
   
@@ -92,24 +93,22 @@ AFRAME.registerComponent("ar-point-manager", {
     const cameraEl = document.querySelector("[gps-new-camera]");
     if (!cameraEl || !this.el.object3D) return;
 
-    this.el.setAttribute("visible", "true");
     this.el.object3D.lookAt(cameraEl.object3D.position);
 
+    /* Correção 2: Comentei a força bruta de posição. 
+       Deixe o GPS colocar a obra no lugar dela. 
+       Se quiser que flutue na frente da câmera ignorando o mapa, 
+       descomente as linhas abaixo e delete o atributo 'gps-new-entity-place' na função buildARScene.
+    */
+
+    /*
     const cameraPos = cameraEl.object3D.position;
-    
-    let direction = new THREE.Vector3(0, 0, -1);
-    direction.applyQuaternion(cameraEl.object3D.quaternion);
-    
-    if (this.data.index === 1) {
-      direction.applyAxisAngle(new THREE.Vector3(0, 1, 0), 0.6);
-    } else if (this.data.index === 2) {
-      direction.applyAxisAngle(new THREE.Vector3(0, 1, 0), -0.6);
-    }
-    
-    let targetPos = new THREE.Vector3();
-    targetPos.addVectors(cameraPos, direction.multiplyScalar(this.data.visualDistance));
-    
+    let direction = new THREE.Vector3(0, 0, -1).applyQuaternion(cameraEl.object3D.quaternion);
+    if (this.data.index === 1) direction.applyAxisAngle(new THREE.Vector3(0, 1, 0), 0.6);
+    if (this.data.index === 2) direction.applyAxisAngle(new THREE.Vector3(0, 1, 0), -0.6);
+    let targetPos = new THREE.Vector3().addVectors(cameraPos, direction.multiplyScalar(this.data.visualDistance));
     this.el.object3D.position.copy(targetPos);
+    */
   }
 });
 
@@ -119,27 +118,15 @@ function buildARScene() {
   scene.setAttribute("embedded", "");
   scene.setAttribute("arjs", "sourceType: webcam; videoTexture: true; debugUIEnabled: false");
   scene.setAttribute("renderer", "antialias: true; alpha: true; colorManagement: true");
-  scene.setAttribute("loading-screen", "enabled: false");
 
   const ambientLight = document.createElement("a-entity");
-  ambientLight.setAttribute("light", "type: ambient; intensity: 1.5");
+  ambientLight.setAttribute("light", "type: ambient; intensity: 2.0");
   scene.appendChild(ambientLight);
 
   const directionalLight = document.createElement("a-entity");
-  directionalLight.setAttribute("light", "type: directional; intensity: 1.0");
-  directionalLight.setAttribute("position", "1 4 3");
+  directionalLight.setAttribute("light", "type: directional; intensity: 1.5");
+  directionalLight.setAttribute("position", "0 10 0");
   scene.appendChild(directionalLight);
-
-  const assets = document.createElement("a-assets");
-
-  AR_POINTS.forEach((point) => {
-    const assetItem = document.createElement("a-asset-item");
-    assetItem.setAttribute("id", point.id);
-    assetItem.setAttribute("src", `${point.model}?v=${Date.now()}`);
-    assets.appendChild(assetItem);
-  });
-
-  scene.appendChild(assets);
 
   const camera = document.createElement("a-camera");
   camera.setAttribute("gps-new-camera", "gpsMinDistance: 1"); 
@@ -147,9 +134,12 @@ function buildARScene() {
 
   AR_POINTS.forEach((point, idx) => {
     const entity = document.createElement("a-entity");
-    entity.setAttribute("gltf-model", `#${point.id}`);
+    
+    // Correção 3: Injeção direta via url() pulando o <a-assets>
+    entity.setAttribute("gltf-model", `url(${point.model}?v=${Date.now()})`);
+    
     entity.setAttribute("gps-new-entity-place", `latitude: ${point.latitude}; longitude: ${point.longitude}`);
-    entity.setAttribute("ar-point-manager", `visualDistance: 3; baseScale: ${point.scale}; index: ${idx}`);
+    entity.setAttribute("ar-point-manager", `visualDistance: 4; baseScale: ${point.scale}; index: ${idx}`);
     
     scene.appendChild(entity);
   });
