@@ -1,9 +1,9 @@
+// 1. Pontos
 const AR_POINTS = [
   {
     id: "ponto-retirantes-3d",
     type: "gltf",
     source: "assets/retirantes.glb",
-    // Mantido na posição que você aprovou
     latitude: -4.969150,
     longitude: -39.012350, 
     scale: "6 6 6",
@@ -12,7 +12,6 @@ const AR_POINTS = [
     id: "ponto-o-sertanejo",
     type: "video",
     source: "assets/o-sertanejo.mp4",
-    // Puxado para perto do modelo 3D, mas ligeiramente ao Norte
     latitude: -4.968950,
     longitude: -39.012250,
     scale: "5 5 1",
@@ -22,7 +21,6 @@ const AR_POINTS = [
     id: "ponto-alma-nordestina",
     type: "image",
     source: "assets/alma-nordestina.jpg",
-    // Trazido para perto, mas afastado do vídeo (mais ao Sul/Leste)
     latitude: -4.969100,
     longitude: -39.012050,
     scale: "4 6 1",
@@ -153,7 +151,6 @@ function buildARScene() {
       entity = document.createElement("a-image");
       entity.setAttribute("src", `${point.source}?v=${Date.now()}`);
 
-      // Força o material a ser plano ("flat") para corrigir o bug da imagem preta
       entity.setAttribute(
         "material",
         "shader: flat; transparent: true; side: double;",
@@ -167,7 +164,7 @@ function buildARScene() {
         entity.setAttribute("rotation", point.rotation);
       }
       entity.setAttribute("look-at", "[gps-new-camera]");
-      entity.setAttribute("position", "0 1 0"); // Eleva 1 metro do chão
+      entity.setAttribute("position", "0 1 0");
     } else if (point.type === "video") {
       entity = document.createElement("a-video");
       entity.setAttribute("src", `${point.source}?v=${Date.now()}`);
@@ -184,7 +181,7 @@ function buildARScene() {
         entity.setAttribute("rotation", point.rotation);
       }
       entity.setAttribute("look-at", "[gps-new-camera]");
-      entity.setAttribute("position", "0 1 0"); // Eleva 1 metro do chão
+      entity.setAttribute("position", "0 1 0");
     }
 
     if (entity) {
