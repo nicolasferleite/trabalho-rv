@@ -9,7 +9,7 @@ const AR_POINTS = [
     scale: "10 10 10",
   },
   {
-    id: "ponto-sertanejo",
+    id: "ponto-o-sertanejo",
     type: "video",
     source: "assets/o-sertanejo.mp4",
     // Ponto 2 (Oeste/Sudoeste)
