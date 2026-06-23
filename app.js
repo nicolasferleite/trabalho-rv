@@ -1,38 +1,30 @@
-// 1. Configuração dos 4 pontos da praça
-// 1. Configuração dos 4 pontos da praça (Coordenadas ajustadas para melhor espaçamento)
 const AR_POINTS = [
   {
     id: "ponto-retirantes-3d",
     type: "gltf",
     source: "assets/retirantes.glb",
-    latitude: -4.963856792480823,
-    longitude: -39.02575945854149,
-    scale: "1 1 1",
+    // Ponto 1 (Norte da praça)
+    latitude: -4.96501709665089,
+    longitude: -39.01037715626991,
+    scale: "10 10 10",
   },
   {
-    id: "ponto-releitura-1",
+    id: "ponto-sertanejo",
     type: "image",
-    source: "assets/releitura-1.svg",
-    latitude: -4.96391,
-    longitude: -39.02581,
-    scale: "2 2 1",
-  },
-  {
-    id: "ponto-releitura-2",
-    type: "image",
-    source: "assets/releitura-2.svg",
-    // Afastado da imagem 1 e reposicionado estrategicamente no meio da cena
-    latitude: -4.9638,
-    longitude: -39.0257,
-    scale: "2 2 1",
+    source: "assets/o-sertanejo.gif",
+    // Ponto 2 (Oeste/Sudoeste)
+    // latitude: -4.96501709665089,
+    // longitude: -39.01037715626991,
+    scale: "3 3 1",
   },
   {
     id: "ponto-alma-nordestina",
     type: "image",
     source: "assets/alma-nordestina.jpg",
-    latitude: -4.964,
-    longitude: -39.0255,
-    scale: "1.5 2 1",
+    // Ponto 4 (Sul da praça)
+    // latitude: -4.96501709665089,
+    // longitude: -39.01037715626991,
+    scale: "3 4 1",
   },
 ];
 
