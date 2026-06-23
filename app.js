@@ -16,7 +16,7 @@ const AR_POINTS = [
     latitude: -4.968950,
     longitude: -39.012250,
     scale: "5 5 1",
-    rotation: "0 90 0",
+    rotation: "0 270 0",
   },
   {
     id: "ponto-alma-nordestina",
